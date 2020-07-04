@@ -158,6 +158,132 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-我的一篇文章，个人博客搭建" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/07/04/%E6%88%91%E7%9A%84%E4%B8%80%E7%AF%87%E6%96%87%E7%AB%A0%EF%BC%8C%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA/">我的一篇文章，个人博客搭建</a>
+    </h1>
+  
+
+        
+        <a href="/2020/07/04/%E6%88%91%E7%9A%84%E4%B8%80%E7%AF%87%E6%96%87%E7%AB%A0%EF%BC%8C%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA/" class="archive-article-date">
+  	<time datetime="2020-07-04T12:12:15.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-07-04</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <ol>
+<li><p>npm install -g cnpm –registry=<a href="http://registry.npm.taobao.org下载淘宝镜像" target="_blank" rel="noopener">http://registry.npm.taobao.org下载淘宝镜像</a></p>
+</li>
+<li><p>cnpm install -g hexo-cli\</p>
+<p>chdir查看文件</p>
+</li>
+<li><p>mkdir blog #创建blog目录</p>
+</li>
+<li><p>下载git 重新打开cmd</p>
+</li>
+<li><p>chdir C:\Users\Administrator\blog   hexo init #生成博客 初始化博客</p>
+</li>
+<li><p>hexo s #启动本地博客服务</p>
+</li>
+<li><p>hexo n “我的第一篇文章” #创建新的文章</p>
+</li>
+<li><p>hexo clean #清理</p>
+</li>
+<li><p>hexo g #生成</p>
+</li>
+<li><p>cnpm install –save hexo-deployer-git #在blog目录下安装git部署插件</p>
+</li>
+<li><p>_config.yml 文件修改</p>
+<p>  type: ‘git’<br>  repo: <a href="https://github.com/qiujiangjiang/qiujiangjiang.github.io" target="_blank" rel="noopener">https://github.com/qiujiangjiang/qiujiangjiang.github.io</a><br>  branch: master</p>
+</li>
+<li><p>如果出现问题可能是用户名没有配置，打开git</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">2</span>、配置用户名和密码</span><br><span class="line">	git config --<span class="keyword">global</span> user.name <span class="string">"follow"</span></span><br><span class="line">	git config --<span class="keyword">global</span> user.email <span class="string">"follow@qq.com"</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>hexo d 上传数据</p>
+</li>
+<li><p>git clone <a href="https://github.com/litten/hexo-theme-yilia.git" target="_blank" rel="noopener">https://github.com/litten/hexo-theme-yilia.git</a> themes/yilia 博客主题下载</p>
+<ul>
+<li><p>经常报错curl 18 transfer closed with outstanding read data remaining</p>
+<ul>
+<li><p>将postBuffer值配置成合适的大小。</p>
+<p>git config –global http.postBuffer 524288000</p>
+<p>命令查看配置好的值postBuffer。</p>
+<p>git config –list</p>
+</li>
+<li><p>如果还是不行</p>
+<p>​    直接在github下载源码放在themes主题中</p>
+<p>​    _config.yml个修改一下</p>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>hexo c    #清理一下<br>hexo g    #生成<br>hexo d    #部署到远程Github仓库</p>
+</li>
+<li><p>如果出现fatal: HttpRequestException encountered. 发送请求时出错。问题</p>
+<p>Github 禁用了TLS v1.0 and v1.1，必须更新Windows的git凭证管理器，才行。</p>
+<p><a href="https://github.com/microsoft/Git-Credential-Manager-for-Windows" target="_blank" rel="noopener">https://github.com/microsoft/Git-Credential-Manager-for-Windows</a></p>
+</li>
+</ol>
+<p>cd 打开到你要管理的代码的文件夹后：</p>
+<p>vi 文件名</p>
+<p>esc zz 保存</p>
+<p>git init    本地创建仓库</p>
+<p>git add –all    文件添加到版本控制器</p>
+<p>git commit -m “本次提交描述”   该命令会将git add .存入暂存区修改内容提交至本地仓库中，若文件未添加至暂存区，则提交时不会提交任何修改。</p>
+<p>git remote add origin …(此处为git仓库地址)  本地文件和后台仓库关联</p>
+<p>git push 上传代码</p>
+<p>git push origin master 第一次上传代码的时候</p>
+<p>git commit 提交代码到本地</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2020/07/04/%E6%88%91%E7%9A%84%E4%B8%80%E7%AF%87%E6%96%87%E7%AB%A0%EF%BC%8C%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-hello-world" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
