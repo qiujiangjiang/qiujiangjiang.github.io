@@ -2,16 +2,44 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>https://qiujiangjiang.github.io/2020/07/04/%E6%88%91%E7%9A%84%E4%B8%80%E7%AF%87%E6%96%87%E7%AB%A0%EF%BC%8C%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA/</loc>
+    <loc>https://qiujiangjiang.github.io/music/index.html</loc>
     
-    <lastmod>2020-07-04T12:37:22.413Z</lastmod>
+    <lastmod>2020-07-05T06:53:26.889Z</lastmod>
     
   </url>
   
   <url>
     <loc>https://qiujiangjiang.github.io/2020/07/04/hello-world/</loc>
     
-    <lastmod>2020-07-04T12:21:00.501Z</lastmod>
+    <lastmod>2020-07-05T05:41:41.350Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://qiujiangjiang.github.io/categories/index.html</loc>
+    
+    <lastmod>2020-07-05T05:05:20.428Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://qiujiangjiang.github.io/tags/index.html</loc>
+    
+    <lastmod>2020-07-05T05:05:10.408Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://qiujiangjiang.github.io/link/index.html</loc>
+    
+    <lastmod>2020-07-05T05:05:02.328Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://qiujiangjiang.github.io/2020/07/04/%E6%88%91%E7%9A%84%E4%B8%80%E7%AF%87%E6%96%87%E7%AB%A0%EF%BC%8C%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA/</loc>
+    
+    <lastmod>2020-07-04T12:37:22.413Z</lastmod>
     
   </url>
   
