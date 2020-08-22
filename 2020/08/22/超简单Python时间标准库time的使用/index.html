@@ -1,0 +1,270 @@
+<!DOCTYPE html><html lang="en" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><title>超简单Python时间标准库time的使用 | 十八岁上王者的博客</title><meta name="description" content="前言在python中包含了最简单的处理时间的标准库，time库能够表达计算机时间，提供获取系统时间并格式化输出的方法，提供系统级精确计时功能。 time库包含三类函数，以下介绍常用的函数：  时间获取：time()、ctime()、gmtime()  时间格式化：strftime()、strptime()  程序计时：sleep()、perf_counter()   时间获取   函数 描述"><meta name="keywords" content="Python,标准库,time"><meta name="author" content="十八岁上王者"><meta name="copyright" content="十八岁上王者"><meta name="format-detection" content="telephone=no"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="https://qiujiangjiang.github.io/2020/08/22/%E8%B6%85%E7%AE%80%E5%8D%95Python%E6%97%B6%E9%97%B4%E6%A0%87%E5%87%86%E5%BA%93time%E7%9A%84%E4%BD%BF%E7%94%A8/"><meta http-equiv="Cache-Control" content="no-transform"><meta http-equiv="Cache-Control" content="no-siteapp"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//fonts.googleapis.com" crossorigin="crossorigin"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><meta property="og:type" content="article"><meta property="og:title" content="超简单Python时间标准库time的使用"><meta property="og:url" content="https://qiujiangjiang.github.io/2020/08/22/%E8%B6%85%E7%AE%80%E5%8D%95Python%E6%97%B6%E9%97%B4%E6%A0%87%E5%87%86%E5%BA%93time%E7%9A%84%E4%BD%BF%E7%94%A8/"><meta property="og:site_name" content="十八岁上王者的博客"><meta property="og:description" content="前言在python中包含了最简单的处理时间的标准库，time库能够表达计算机时间，提供获取系统时间并格式化输出的方法，提供系统级精确计时功能。 time库包含三类函数，以下介绍常用的函数：  时间获取：time()、ctime()、gmtime()  时间格式化：strftime()、strptime()  程序计时：sleep()、perf_counter()   时间获取   函数 描述"><meta property="og:image" content="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg"><meta property="article:published_time" content="2020-08-22T08:08:16.000Z"><meta property="article:modified_time" content="2020-08-22T16:09:17.582Z"><meta name="twitter:card" content="summary"><script>var activateDarkMode = function () {
+  document.documentElement.setAttribute('data-theme', 'dark')
+  if (document.querySelector('meta[name="theme-color"]') !== null) {
+    document.querySelector('meta[name="theme-color"]').setAttribute('content', '#000')
+  }
+}
+var activateLightMode = function () {
+  document.documentElement.setAttribute('data-theme', 'light')
+  if (document.querySelector('meta[name="theme-color"]') !== null) {
+    document.querySelector('meta[name="theme-color"]').setAttribute('content', '#fff')
+  }
+}
+
+var getCookies = function (name) {
+  const value = `; ${document.cookie}`
+  const parts = value.split(`; ${name}=`)
+  if (parts.length === 2) return parts.pop().split(';').shift()
+}
+
+var autoChangeMode = 'false'
+var t = getCookies('theme')
+if (autoChangeMode === '1') {
+  var isDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches
+  var isLightMode = window.matchMedia('(prefers-color-scheme: light)').matches
+  var isNotSpecified = window.matchMedia('(prefers-color-scheme: no-preference)').matches
+  var hasNoSupport = !isDarkMode && !isLightMode && !isNotSpecified
+
+  if (t === undefined) {
+    if (isLightMode) activateLightMode()
+    else if (isDarkMode) activateDarkMode()
+    else if (isNotSpecified || hasNoSupport) {
+      console.log('You specified no preference for a color scheme or your browser does not support it. I Schedule dark mode during night time.')
+      var now = new Date()
+      var hour = now.getHours()
+      var isNight = hour <= 6 || hour >= 18
+      isNight ? activateDarkMode() : activateLightMode()
+    }
+    window.matchMedia('(prefers-color-scheme: dark)').addListener(function (e) {
+      if (Cookies.get('theme') === undefined) {
+        e.matches ? activateDarkMode() : activateLightMode()
+      }
+    })
+  } else if (t === 'light') activateLightMode()
+  else activateDarkMode()
+} else if (autoChangeMode === '2') {
+  now = new Date()
+  hour = now.getHours()
+  isNight = hour <= 6 || hour >= 18
+  if (t === undefined) isNight ? activateDarkMode() : activateLightMode()
+  else if (t === 'light') activateLightMode()
+  else activateDarkMode()
+} else {
+  if (t === 'dark') activateDarkMode()
+  else if (t === 'light') activateLightMode()
+}</script><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.css"><link rel="next" title="超简单爬虫使用requests模块+有道云翻译,python实现翻译小功能" href="https://qiujiangjiang.github.io/2020/08/17/%E8%B6%85%E7%AE%80%E5%8D%95%E7%88%AC%E8%99%AB%E4%BD%BF%E7%94%A8requests%E6%A8%A1%E5%9D%97-%E6%9C%89%E9%81%93%E4%BA%91%E7%BF%BB%E8%AF%91-python%E5%AE%9E%E7%8E%B0%E7%BF%BB%E8%AF%91%E5%B0%8F%E5%8A%9F%E8%83%BD/"><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Titillium+Web&amp;display=swap"><script>var GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: {"defaultEncoding":2,"translateDelay":0,"msgToTraditionalChinese":"繁","msgToSimplifiedChinese":"簡"},
+  noticeOutdate: undefined,
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  bookmark: {
+    message_prev: '按',
+    message_next: '键将本页加入书签'
+  },
+  runtime_unit: '天',
+  runtime: true,
+  copyright: undefined,
+  ClickShowText: undefined,
+  medium_zoom: false,
+  fancybox: true,
+  Snackbar: undefined,
+  justifiedGallery: {
+    js: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/js/jquery.justifiedGallery.min.js',
+    css: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/css/justifiedGallery.min.css'
+  },
+  baiduPush: false,
+  highlightCopy: true,
+  highlightLang: true,
+  isPhotoFigcaption: false,
+  islazyload: true,
+  isanchor: false    
+}</script><script>var GLOBAL_CONFIG_SITE = { 
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isSidebar: true,
+  postUpdate: '2020-08-23 00:09:17'
+}</script><noscript><style>
+#nav {
+  opacity: 1
+}
+.justified-gallery img{
+  opacity: 1
+}
+</style></noscript><div class="aplayer" data-id="2617871507" data-server="netease" data-type="playlist" data-fixed="true" data-listFolded="false" data-order="random" data-preload="none"></div><link rel="stylesheet" href="https://cdn.bootcss.com/aplayer/1.10.1/APlayer.min.css"><script src="https://cdn.bootcss.com/aplayer/1.10.1/APlayer.min.js"></script><script src="https://cdn.jsdelivr.net/npm/meting@1.2.0/dist/Meting.min.js"></script><meta name="generator" content="Hexo 4.2.1"><link rel="alternate" href="/atom.xml" title="十八岁上王者的博客" type="application/atom+xml">
+</head><body><div id="mobile-sidebar"><div id="menu_mask"></div><div id="mobile-sidebar-menus"><div class="mobile_author_icon"><img class="avatar-img" src="/img/avatar.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="mobile_post_data"><div class="mobile_data_item is-center"><div class="mobile_data_link"><a href="/archives/"><div class="headline">文章</div><div class="length_num">5</div></a></div></div><div class="mobile_data_item is-center">      <div class="mobile_data_link"><a href="/tags/"><div class="headline">标签</div><div class="length_num">8</div></a></div></div><div class="mobile_data_item is-center">     <div class="mobile_data_link"><a href="/categories/"><div class="headline">分类</div><div class="length_num">3</div></a></div></div></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 档案</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page"><i class="fa-fw fas fa-list"></i><span> 列表</span><i class="fas fa-chevron-down menus-expand"></i></a><ul class="menus_item_child"><li><a class="site-page" href="/music/"><i class="fa-fw fas fa-music"></i><span> 音乐</span></a></li><li><a class="site-page" href="/movies/"><i class="fa-fw fas fa-video"></i><span> 电影</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><i class="fas fa-arrow-right on" id="toggle-sidebar"></i><div id="sidebar"><div class="sidebar-toc"><div class="sidebar-toc__title">目录</div><div class="sidebar-toc__progress"><span class="progress-notice">你已经读了</span><span class="progress-num">0</span><span class="progress-percentage">%</span><div class="sidebar-toc__progress-bar">     </div></div><div class="sidebar-toc__content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#前言"><span class="toc-number">1.</span> <span class="toc-text">前言</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#时间获取"><span class="toc-number">2.</span> <span class="toc-text">时间获取</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#时间格式化"><span class="toc-number">3.</span> <span class="toc-text">时间格式化</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#程序计时"><span class="toc-number">4.</span> <span class="toc-text">程序计时</span></a></li></ol></div></div></div><div id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url(https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg)"><nav id="nav"><span class="pull-left" id="blog_name"><a class="blog_title" id="site-name" href="/">十八岁上王者的博客</a></span><span class="pull-right menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 档案</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page"><i class="fa-fw fas fa-list"></i><span> 列表</span><i class="fas fa-chevron-down menus-expand"></i></a><ul class="menus_item_child"><li><a class="site-page" href="/music/"><i class="fa-fw fas fa-music"></i><span> 音乐</span></a></li><li><a class="site-page" href="/movies/"><i class="fa-fw fas fa-video"></i><span> 电影</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><span class="toggle-menu close"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></span></span></nav><div id="post-info"><div id="post-title"><div class="posttitle">超简单Python时间标准库time的使用</div></div><div id="post-meta"><div class="meta-firstline"><time class="post-meta__date"><span class="post-meta__date-created" title="发表于 2020-08-22 16:08:16"><i class="far fa-calendar-alt fa-fw"></i> 发表于 2020-08-22</span><span class="post-meta__separator">|</span><span class="post-meta__date-updated" title="更新于 2020-08-23 00:09:17"><i class="fas fa-history fa-fw"></i> 更新于 2020-08-23</span></time><span class="post-meta__categories"><span class="post-meta__separator">|</span><i class="fas fa-inbox fa-fw post-meta__icon"></i><a class="post-meta__categories" href="/categories/Python/">Python</a></span></div><div class="meta-secondline"> </div><div class="meta-thirdline"><span class="post-meta-pv-cv"><i class="far fa-eye fa-fw post-meta__icon"></i><span>阅读量:</span><span id="busuanzi_value_page_pv"></span></span></div></div></div></header><main class="layout_post" id="content-inner"><article id="post"><div class="post-content" id="article-container"><h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>在python中包含了最简单的处理时间的标准库，time库能够表达计算机时间，提供获取系统时间并格式化输出的方法，提供系统级精确计时功能。</p>
+<p>time库包含三类函数，以下介绍常用的函数：</p>
+<ul>
+<li><p>时间获取：time()、ctime()、gmtime()</p>
+</li>
+<li><p>时间格式化：strftime()、strptime()</p>
+</li>
+<li><p>程序计时：sleep()、perf_counter()</p>
+</li>
+</ul>
+<h1 id="时间获取"><a href="#时间获取" class="headerlink" title="时间获取"></a>时间获取</h1><table>
+<thead>
+<tr>
+<th>函数</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>time()</td>
+<td>获取当前时间戳，即当前系统内表示时间的一个浮点数。</td>
+</tr>
+<tr>
+<td>ctime()</td>
+<td>获取当前时间，并返回一个以人类可读方式的字符串。</td>
+</tr>
+<tr>
+<td>gmtime()</td>
+<td>获取当前时间，并返回计算机可处理的时间格式。</td>
+</tr>
+</tbody></table>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> time</span><br><span class="line"></span><br><span class="line"><span class="comment"># 获取当前时间戳，即当前系统内表示时间的一个浮点数。</span></span><br><span class="line">print(<span class="string">"===========time()================="</span>)</span><br><span class="line">print(time.time())</span><br><span class="line"></span><br><span class="line"><span class="comment"># 获取当前时间，并返回一个以人类可读方式的字符串。</span></span><br><span class="line">print(<span class="string">"===========ctime()================="</span>)</span><br><span class="line">print(time.ctime())</span><br><span class="line"></span><br><span class="line"><span class="comment"># 获取当前时间，并返回计算机可处理的时间格式。</span></span><br><span class="line">print(<span class="string">"===========gmtime()================="</span>)</span><br><span class="line">print(time.gmtime())</span><br></pre></td></tr></table></figure>
+<p>输出结果:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">===========time()=================</span><br><span class="line"><span class="number">1598105489.9561064</span></span><br><span class="line">===========ctime()=================</span><br><span class="line">Sat Aug <span class="number">22</span> <span class="number">22</span>:<span class="number">11</span>:<span class="number">29</span> <span class="number">2020</span></span><br><span class="line">===========gmtime()=================</span><br><span class="line">time.struct_time(tm_year=<span class="number">2020</span>, tm_mon=<span class="number">8</span>, tm_mday=<span class="number">22</span>, tm_hour=<span class="number">14</span>, tm_min=<span class="number">11</span>, tm_sec=<span class="number">29</span>, tm_wday=<span class="number">5</span>, tm_yday=<span class="number">235</span>, tm_isdst=<span class="number">0</span>)</span><br></pre></td></tr></table></figure>
+
+
+<h1 id="时间格式化"><a href="#时间格式化" class="headerlink" title="时间格式化"></a>时间格式化</h1><table>
+<thead>
+<tr>
+<th>函数</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>strftime()</td>
+<td>按照一定格式把时间显示成所需要的效果，传入的值是时间元组。</td>
+</tr>
+<tr>
+<td>timeStr()</td>
+<td>按照特定时间格式将字符串转换（解析）为时间类型，传入的值是字符串。</td>
+</tr>
+</tbody></table>
+<table>
+<thead>
+<tr>
+<th>格式化字符串</th>
+<th>日期/时间说明</th>
+<th>取值范围</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>%Y</td>
+<td>年份</td>
+<td>0000~9999</td>
+</tr>
+<tr>
+<td>%m</td>
+<td>月份（数字）</td>
+<td>01~12</td>
+</tr>
+<tr>
+<td>%B</td>
+<td>月份（英文全称）</td>
+<td>January~December</td>
+</tr>
+<tr>
+<td>%b</td>
+<td>月份（英文缩写）</td>
+<td>Jan~Dec</td>
+</tr>
+<tr>
+<td>%d</td>
+<td>日期</td>
+<td>01~31</td>
+</tr>
+<tr>
+<td>%A</td>
+<td>星期（英文全称）</td>
+<td>Monday~Sunday</td>
+</tr>
+<tr>
+<td>%a</td>
+<td>星期（英文缩写）</td>
+<td>Mon~Sun</td>
+</tr>
+<tr>
+<td>%H</td>
+<td>小时（24小时制）</td>
+<td>00~23</td>
+</tr>
+<tr>
+<td>%I</td>
+<td>小时（12小时制）</td>
+<td>01~12</td>
+</tr>
+<tr>
+<td>%p</td>
+<td>上/下午</td>
+<td>AM，PM</td>
+</tr>
+<tr>
+<td>%M</td>
+<td>分钟</td>
+<td>00~59</td>
+</tr>
+<tr>
+<td>%S</td>
+<td>秒</td>
+<td>00~59</td>
+</tr>
+<tr>
+<td><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> time</span><br><span class="line"></span><br><span class="line"><span class="comment"># strftime()是格式化模板字符串，用来定义输出效果，说白了就是按照一定格式把时间显示成所需要的效果，传入的值是时间元组。</span></span><br><span class="line">print(<span class="string">"===========strptime()================="</span>)</span><br><span class="line">t=time.gmtime()</span><br><span class="line">print( time.strftime(<span class="string">"%Y-%m-%d %H:%M:%S"</span>,t))</span><br><span class="line"></span><br><span class="line"><span class="comment"># strptime()按照特定时间格式将字符串转换（解析）为时间类型，传入的值是字符串。</span></span><br><span class="line">print(<span class="string">"===========strptime()================="</span>)</span><br><span class="line">timeStr=<span class="string">'2018-01-26 12:55:20'</span></span><br><span class="line">print(time.strptime(timeStr,<span class="string">"%Y-%m-%d %H:%M:%S"</span>))</span><br></pre></td></tr></table></figure></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>结果:</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">===========strptime()=================</span><br><span class="line"><span class="number">2020</span><span class="number">-08</span><span class="number">-22</span> <span class="number">14</span>:<span class="number">11</span>:<span class="number">29</span></span><br><span class="line">===========strptime()=================</span><br><span class="line">time.struct_time(tm_year=<span class="number">2018</span>, tm_mon=<span class="number">1</span>, tm_mday=<span class="number">26</span>, tm_hour=<span class="number">12</span>, tm_min=<span class="number">55</span>, tm_sec=<span class="number">20</span>, tm_wday=<span class="number">4</span>, tm_yday=<span class="number">26</span>, tm_isdst=<span class="number">-1</span>)</span><br></pre></td></tr></table></figure></td>
+<td></td>
+<td></td>
+</tr>
+</tbody></table>
+<h1 id="程序计时"><a href="#程序计时" class="headerlink" title="程序计时"></a>程序计时</h1><p>程序计时指测量起止动作所经历时间的过程，主要包括测量时间和产生时间两部分。time库提供了一个非常精准的测量时间函数perf_counter()，该函数可以获取CPU以其频率运行的时钟，这个时间往往是以纳秒来计算的，所以这样获取的时间非常精准。另外产生时间函数sleep()，它可以让程序休眠或产生一段时间。</p>
+<table>
+<thead>
+<tr>
+<th>函数</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>perf_counter()</td>
+<td>返回一个CPU级别的精确时间计数值，单位为秒。由于这个计数值起点不确定，连续调用求差值才有意义。</td>
+</tr>
+<tr>
+<td>sleep(s)</td>
+<td>s为休眠时间，单位秒，可以是浮点数。</td>
+</tr>
+</tbody></table>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> time</span><br><span class="line"></span><br><span class="line"><span class="comment"># 得到开始时间</span></span><br><span class="line">print(<span class="string">"===========perf_counter()================="</span>)</span><br><span class="line">startTime=time.perf_counter()</span><br><span class="line">print(startTime)</span><br><span class="line"><span class="comment"># 得到结束时间</span></span><br><span class="line">endTime=time.perf_counter()</span><br><span class="line">print(endTime)</span><br><span class="line"><span class="comment"># 开始时间-结束时间</span></span><br><span class="line">print(endTime-startTime)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 等待</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">wait</span><span class="params">()</span>:</span></span><br><span class="line">    print(<span class="string">"===========time.sleep(3.3)================="</span>)</span><br><span class="line">    print(time.time())</span><br><span class="line">    time.sleep(<span class="number">3.3</span>)</span><br><span class="line">    print(<span class="string">"过去了3.3秒"</span>)</span><br><span class="line">    print(time.time())</span><br><span class="line"></span><br><span class="line">wait()</span><br></pre></td></tr></table></figure>
+
+<p>输出:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">===========perf_counter()=================</span><br><span class="line"><span class="number">0.0322414</span></span><br><span class="line"><span class="number">0.0323797</span></span><br><span class="line"><span class="number">0.00013829999999999398</span></span><br><span class="line">===========time.sleep(<span class="number">3.3</span>)=================</span><br><span class="line"><span class="number">1598105489.9751248</span></span><br><span class="line">过去了<span class="number">3.3</span>秒</span><br><span class="line"><span class="number">1598105493.2761245</span></span><br></pre></td></tr></table></figure>
+
+<p>那么下面我们做一个小测试，将当前时间转换成指定格式字符串再转换成时间戳。</p>
+<p>需求：</p>
+<ol>
+<li>获取当前时间戳</li>
+<li>转换成指定格式字符串</li>
+<li>转换成时间戳</li>
+</ol>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 导入时间库</span></span><br><span class="line"><span class="keyword">import</span> time</span><br><span class="line"></span><br><span class="line"><span class="comment"># 需要注意的是不能使用时间戳,需要将时间戳转换成时间元组,才能调用strftime()方法,strptime()方法返回的也是元组</span></span><br><span class="line"><span class="comment"># 使用localtime()方法将时间戳转换成时间元组</span></span><br><span class="line">timestamp=time.time()</span><br><span class="line">print(<span class="string">"=============我是时间戳timestamp==================\n %s"</span> % timestamp)</span><br><span class="line">time_tuple=time.localtime(timestamp)</span><br><span class="line">print(<span class="string">"=============我是时间元组time_tuple==================\n %s"</span> % str(time_tuple))</span><br><span class="line"><span class="comment"># 使用strftime()方法将时间元组转换成指定样式字符串</span></span><br><span class="line">time_str=time.strftime(<span class="string">"%Y年%m月%d日 %H时%M分%S秒"</span>,time_tuple)</span><br><span class="line">print(<span class="string">"=============我是指定样式字符串time_str==================\n %s"</span> % time_str)</span><br><span class="line"><span class="comment"># 使用strptime()方法将指定样式字符串转换成时间元组</span></span><br><span class="line">time_tuple2=time.strptime(time_str,<span class="string">"%Y年%m月%d日 %H时%M分%S秒"</span>)</span><br><span class="line">print(<span class="string">"=============我是时间元组time_tuple2==================\n %s"</span> % str(time_tuple))</span><br><span class="line"><span class="comment"># 使用mktime()方法将时间元组转换成时间戳</span></span><br><span class="line">timestamp2=time.mktime(time_tuple2)</span><br><span class="line">print(<span class="string">"=============我是时间戳timestamp2==================\n %s"</span> % timestamp2)</span><br></pre></td></tr></table></figure>
+
+<p>输出:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">=============我是时间戳timestamp==================</span><br><span class="line"> <span class="number">1598110710.4706056</span></span><br><span class="line">=============我是时间元组time_tuple==================</span><br><span class="line"> time.struct_time(tm_year=<span class="number">2020</span>, tm_mon=<span class="number">8</span>, tm_mday=<span class="number">22</span>, tm_hour=<span class="number">23</span>, tm_min=<span class="number">38</span>, tm_sec=<span class="number">30</span>, tm_wday=<span class="number">5</span>, tm_yday=<span class="number">235</span>, tm_isdst=<span class="number">0</span>)</span><br><span class="line">=============我是指定样式字符串time_str==================</span><br><span class="line"> <span class="number">2020</span>年<span class="number">08</span>月<span class="number">22</span>日 <span class="number">23</span>时<span class="number">38</span>分<span class="number">30</span>秒</span><br><span class="line">=============我是时间元组time_tuple2==================</span><br><span class="line"> time.struct_time(tm_year=<span class="number">2020</span>, tm_mon=<span class="number">8</span>, tm_mday=<span class="number">22</span>, tm_hour=<span class="number">23</span>, tm_min=<span class="number">38</span>, tm_sec=<span class="number">30</span>, tm_wday=<span class="number">5</span>, tm_yday=<span class="number">235</span>, tm_isdst=<span class="number">0</span>)</span><br><span class="line">=============我是时间戳timestamp2==================</span><br><span class="line"> <span class="number">1598110710.0</span></span><br></pre></td></tr></table></figure>
+
+</div><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="mailto:undefined">十八岁上王者</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="https://qiujiangjiang.github.io/2020/08/22/%E8%B6%85%E7%AE%80%E5%8D%95Python%E6%97%B6%E9%97%B4%E6%A0%87%E5%87%86%E5%BA%93time%E7%9A%84%E4%BD%BF%E7%94%A8/">https://qiujiangjiang.github.io/2020/08/22/%E8%B6%85%E7%AE%80%E5%8D%95Python%E6%97%B6%E9%97%B4%E6%A0%87%E5%87%86%E5%BA%93time%E7%9A%84%E4%BD%BF%E7%94%A8/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://qiujiangjiang.github.io" target="_blank">十八岁上王者的博客</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/Python/">Python</a><a class="post-meta__tags" href="/tags/%E6%A0%87%E5%87%86%E5%BA%93/">标准库</a><a class="post-meta__tags" href="/tags/time/">time</a></div><div class="post_share"><div class="social-share" data-image="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js/dist/css/share.min.css"/><script src="https://cdn.jsdelivr.net/npm/social-share.js/dist/js/social-share.min.js"></script></div></div><nav class="pagination-post" id="pagination"><div class="next-post pull-full"><a href="/2020/08/17/%E8%B6%85%E7%AE%80%E5%8D%95%E7%88%AC%E8%99%AB%E4%BD%BF%E7%94%A8requests%E6%A8%A1%E5%9D%97-%E6%9C%89%E9%81%93%E4%BA%91%E7%BF%BB%E8%AF%91-python%E5%AE%9E%E7%8E%B0%E7%BF%BB%E8%AF%91%E5%B0%8F%E5%8A%9F%E8%83%BD/"><img class="next-cover" data-src="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg" onerror="onerror=null;src='/img/404.jpg'"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">超简单爬虫使用requests模块+有道云翻译,python实现翻译小功能</div></div></a></div></nav><div class="relatedPosts"><div class="relatedPosts_headline"><i class="fas fa-thumbs-up fa-fw"></i><span> 相关推荐</span></div><div class="relatedPosts_list"><div class="relatedPosts_item"><a href="/2020/08/17/超简单爬虫使用requests模块-有道云翻译-python实现翻译小功能/" title="超简单爬虫使用requests模块+有道云翻译,python实现翻译小功能"><img class="relatedPosts_cover" data-src="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg"><div class="relatedPosts_main is-center"><div class="relatedPosts_date"><i class="far fa-calendar-alt fa-fw"></i> 2020-08-17</div><div class="relatedPosts_title">超简单爬虫使用requests模块+有道云翻译,python实现翻译小功能</div></div></a></div></div></div></article></main><footer id="footer" data-type="color"><div id="footer-wrap"><div class="copyright">&copy;2020 By 十八岁上王者</div><div class="framework-info"><span>驱动 </span><a href="https://hexo.io" target="_blank" rel="noopener"><span>Hexo</span></a><span class="footer-separator">|</span><span>主题 </span><a href="https://github.com/jerryc127/hexo-theme-butterfly" target="_blank" rel="noopener"><span>Butterfly</span></a></div></div></footer></div><section id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="font_plus" type="button" title="放大字体"><i class="fas fa-plus"></i></button><button id="font_minus" type="button" title="缩小字体"><i class="fas fa-minus"></i></button><button id="translateLink" type="button" title="简繁转换">繁</button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></section><script src="https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js"></script><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="/js/tw_cn.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js"></script><script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><script src="https://cdn.jsdelivr.net/npm/instant.page/instantpage.min.js" type="module" defer></script><script src="https://cdn.jsdelivr.net/npm/vanilla-lazyload/dist/lazyload.iife.min.js" async></script></body></html>
