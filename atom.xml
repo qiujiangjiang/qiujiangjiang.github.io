@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://qiujiangjiang.github.io/"/>
-  <updated>2020-08-22T16:14:14.710Z</updated>
+  <updated>2020-08-23T15:00:19.707Z</updated>
   <id>https://qiujiangjiang.github.io/</id>
   
   <author>
@@ -15,6 +15,36 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>超简单Python随机标准库random的使用</title>
+    <link href="https://qiujiangjiang.github.io/2020/08/23/%E8%B6%85%E7%AE%80%E5%8D%95Python%E9%9A%8F%E6%9C%BA%E6%A0%87%E5%87%86%E5%BA%93random%E7%9A%84%E4%BD%BF%E7%94%A8/"/>
+    <id>https://qiujiangjiang.github.io/2020/08/23/%E8%B6%85%E7%AE%80%E5%8D%95Python%E9%9A%8F%E6%9C%BA%E6%A0%87%E5%87%86%E5%BA%93random%E7%9A%84%E4%BD%BF%E7%94%A8/</id>
+    <published>2020-08-23T14:59:06.000Z</published>
+    <updated>2020-08-23T15:00:19.707Z</updated>
+    
+    <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>random库是使用随机数的Python标准库</p><p>因为是标准库，使用时候只需要import random</p><p>random库包含两类函数，常用的共8个,其中seed()改变随机数生成器的种子 seed。如果你不了解其原理，你不必特别去设定 seed，Python会帮你选择 seed。</p><ul><li><p>基本随机函数： seed(), random()</p></li><li><p>扩展随机函数：randint(), getrandbits(), uniform(), randrange(), choice(), shuffle()</p></li></ul><h1 id="数字随机"><a href="#数字随机" class="headerlink" title="数字随机"></a>数字随机</h1><table><thead><tr><th>函数</th><th>描述</th></tr></thead><tbody><tr><td>random.random()</td><td>产生0 到 1 之间的随机浮点数</td></tr><tr><td>random.randint()</td><td>产生指定整数区间的随机整数数</td></tr><tr><td>random.uniform()</td><td>产生指定浮点数之间的随机浮点数</td></tr><tr><td>random.randrange()</td><td>产生指定整数区间,指定步长的随机整数数</td></tr></tbody></table><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> random</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">print(<span class="string">"=====我是0 到 1 之间的随机浮点数=====\n %s"</span> % random.random())</span><br><span class="line">print(<span class="string">"=====我是10 到 100 之间的随机整数=====\n %s"</span> % random.randint(<span class="number">10</span>,<span class="number">100</span>))</span><br><span class="line">print(<span class="string">"=====我是1.1 到 150.1 之间的随机浮点数=====\n %s"</span> % random.uniform(<span class="number">1.1</span>,<span class="number">150.1</span>))</span><br><span class="line">print(<span class="string">"=====我是100 到 200 之间的随机偶数=====\n %s"</span> % random.randrange(<span class="number">100</span>,<span class="number">200</span>,<span class="number">2</span>))</span><br></pre></td></tr></table></figure><p>输出:</p><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">=====我是<span class="number">0</span> 到 <span class="number">1</span> 之间的随机浮点数=====</span><br><span class="line"> <span class="number">0.27596502897815</span></span><br><span class="line">=====我是<span class="number">10</span> 到 <span class="number">100</span> 之间的随机整数=====</span><br><span class="line"> <span class="number">82</span></span><br><span class="line">=====我是<span class="number">1.1</span> 到 <span class="number">150.1</span> 之间的随机浮点数=====</span><br><span class="line"> <span class="number">79.66521085055548</span></span><br><span class="line">=====我是<span class="number">100</span> 到 <span class="number">200</span> 之间的随机偶数=====</span><br><span class="line"> <span class="number">112</span></span><br></pre></td></tr></table></figure><h1 id="列表随机"><a href="#列表随机" class="headerlink" title="列表随机"></a>列表随机</h1><table><thead><tr><th>函数</th><th>描述</th></tr></thead><tbody><tr><td>random.choice()</td><td>指定列表中随机选取一个元素</td></tr><tr><td>random.sample()</td><td>指定列表中随机选取指定个个数元素</td></tr><tr><td>random.shuffle()</td><td>打乱指定列表元素顺序</td></tr></tbody></table><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> random</span><br><span class="line"></span><br><span class="line">my_wife=[<span class="string">"新垣结衣"</span>,<span class="string">"范冰冰"</span>,<span class="string">"刘亦菲"</span>,<span class="string">"麻宫雅典娜"</span>,<span class="string">"杨超越"</span>]</span><br><span class="line">print(<span class="string">"我是原本的列表my_wife :\n%s"</span> % my_wife )</span><br><span class="line">print(<span class="string">"=====我是my_wife列表中随机选取1个元素=====\n %s"</span> % random.choice(my_wife))</span><br><span class="line">print(<span class="string">"=====我是my_wife列表中随机抽选3个元素=====\n %s"</span> % random.sample(my_wife,<span class="number">3</span>))</span><br><span class="line">random.shuffle(my_wife)</span><br><span class="line">print(<span class="string">"=====我是打乱my_wife列表元素顺序=====\n %s"</span> %  my_wife)</span><br></pre></td></tr></table></figure><p>输出:</p><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">我是原本的列表my_wife :</span><br><span class="line">[<span class="string">'新垣结衣'</span>, <span class="string">'范冰冰'</span>, <span class="string">'刘亦菲'</span>, <span class="string">'麻宫雅典娜'</span>, <span class="string">'杨超越'</span>]</span><br><span class="line">=====我是my_wife列表中随机选取<span class="number">1</span>个元素=====</span><br><span class="line"> 麻宫雅典娜</span><br><span class="line">=====我是my_wife列表中随机抽选<span class="number">3</span>个元素=====</span><br><span class="line"> [<span class="string">'麻宫雅典娜'</span>, <span class="string">'刘亦菲'</span>, <span class="string">'杨超越'</span>]</span><br><span class="line">=====我是打乱my_wife列表元素顺序=====</span><br><span class="line"> [<span class="string">'范冰冰'</span>, <span class="string">'新垣结衣'</span>, <span class="string">'刘亦菲'</span>, <span class="string">'杨超越'</span>, <span class="string">'麻宫雅典娜'</span>]</span><br></pre></td></tr></table></figure>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;link rel=&quot;stylesheet&quot; class=&quot;aplayer-secondary-style-marker&quot; href=&quot;\assets\css\APlayer.min.css&quot;&gt;&lt;script src=&quot;\assets\js\APlayer.min.js&quot; cla
+      
+    
+    </summary>
+    
+    
+      <category term="Python" scheme="https://qiujiangjiang.github.io/categories/Python/"/>
+    
+    
+      <category term="Python" scheme="https://qiujiangjiang.github.io/tags/Python/"/>
+    
+      <category term="标准库" scheme="https://qiujiangjiang.github.io/tags/%E6%A0%87%E5%87%86%E5%BA%93/"/>
+    
+      <category term="random" scheme="https://qiujiangjiang.github.io/tags/random/"/>
+    
+  </entry>
   
   <entry>
     <title>超简单Python时间标准库time的使用</title>
