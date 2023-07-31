@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script charset="UTF-8" id="LA_COLLECT" src="//sdk.51.la/js-sdk-pro.min.js"></script>
+<script>LA.init({id:"JrHVZTMacdBS3JNE",ck:"JrHVZTMacdBS3JNE"})</script>
+    <script src="js/qrcode.min.js"></script>
+
+
+<body>
+    请输入:<br>
+    <textarea name="txt" clos=",50" rows="5" warp="virtual">
+       
+    </textarea>
+    <button id="btn1" type="button" >点我!</button> 
+    <!-- onclick="get_qrcode" -->
+    <br>
+    纯文字:<br>
+    <div id="qrcode"></div>
+    带连接:<br>
+    <div id="qrcode_link"></div>
+    <!-- <div id="app">{{ message }}</div> -->
+</body>
+<script>
+    function urlencode (str) {  
+    str = (str + '').toString();   
+
+    return encodeURIComponent(str).replace(/!/g, '%21').replace(/'/g, '%27').replace(/\(/g, '%28').  
+    replace(/\)/g, '%29').replace(/\*/g, '%2A').replace(/%20/g, '+');  
+}
+
+    const red_link = 'https://www.xiaohongshu.com/mobile/tags/sougood.top?name='
+    const qrcode=new QRCode(document.querySelector("#qrcode"), "hello 1111111world"); 
+    const qrcode_link=new QRCode(document.querySelector("#qrcode_link"), red_link+ "hello 1111111world"); 
+    var btn=document.getElementById("btn1");
+    btn.addEventListener('click',function(){
+        get_qrcode()
+        });
+    function get_qrcode() {
+        qrcode.makeCode(document.querySelector('textarea').value);
+        qrcode_link.makeCode(red_link+urlencode(document.querySelector('textarea').value));
+       // new QRCode(document.querySelector("#qrcode"), ); 
+    } 
+
+    // const { createApp } = Vue
+//     createApp({
+//     data() {
+//       return {
+//         message: 'Hello Vue!'
+//       }
+//     }
+//   }).mount('#app')
+</script>
+<html >

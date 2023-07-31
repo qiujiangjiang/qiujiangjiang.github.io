@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    请输入数据:<br>
+    <textarea name="txt" clos=",50" rows="5" warp="virtual">
+
+    </textarea>
+    <br>
+    每组几个:<br>
+    <input>
+    <br>
+    <button id="btn" type="button">点我!</button>
+    <br>
+
+    <script>
+
+        // 获取数组
+        function get_arr() {
+            const content = document.querySelector("textarea").value
+            const list = content.trim().split(/\n|\t|,\n|,/g)
+            console.log(`总共${list.length}个,${list}`);
+            return list
+        }
+
+        // 先随机洗牌
+        function shuffle(array) {
+            let res = [], random;
+            while (array.length > 0) {
+                random = Math.floor(Math.random() * array.length);
+                res.push(array[random]);
+                array.splice(random, 1);
+            }
+            return res;
+        }
+
+
+
+        //const arr = ['a', 'b', 'c', 'd'];
+        function chunk(arr, size) {
+            const list = [];
+            let current = [];
+            arr.forEach(t => {
+                current.push(t);
+                if (current.length === size) {
+                    list.push(current);
+                    current = [];
+                }
+            });
+            if (current.length) {
+                list.push(current);
+            }
+            return list;
+        }
+
+
+        //  添加dom
+        function add_dom(arr){
+            const div = document.createElement('div')
+            for (let index = 0; index < arr.length; index++) {
+                const element = arr[index];
+                
+                const tmp = document.createElement('div')
+                const text = document.createTextNode(JSON.stringify(element))
+                tmp.appendChild(text)
+                
+                div.appendChild(tmp)
+            }
+            document.querySelector('body').appendChild(div)
+        }
+
+        //     chunk(arr, 2);
+        //     // => [['a', 'b'], ['c', 'd']]
+
+        //     chunk(arr, 3);
+        // // => [['a', 'b', 'c'], ['d']]
+        const btn = document.querySelector('button')
+        btn.addEventListener('click', function () {
+            const n = document.querySelector('input').value
+            console.log(`需要分成${n}组`);
+          // console.log( )
+           add_dom(chunk(shuffle(get_arr()),Number(n)))
+        });
+
+    </script>
+</body>
+
+</html>

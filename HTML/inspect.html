@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>上传文件夹</title>
+    <style>
+        .a,.b{
+            color: green;
+        }
+        .c{
+            color: red;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+<h1>上传文件夹</h1>
+两个步骤：
+1.点击上传文件夹
+2.点击上传
+<input type="file" id="fileInput" webkitdirectory>
+<button type="button" onclick="readFiles()">上传</button>
+<table id="fileList">
+    <thead>
+    <tr>
+        <th>文件路径</th>
+        <th>尺寸大小</th>
+    </tr>
+    </thead>
+    <tbody></tbody>
+</table>
+<script >
+  function readFiles() {
+    const fileList = document.getElementById('fileInput').files;
+    const tableBody = document.querySelector('#fileList tbody');
+    tableBody.innerHTML = '';
+
+    for (const file of fileList) {
+      const filePath = file.webkitRelativePath;
+      const fileReader = new FileReader();
+
+      fileReader.onload = function(event) {
+        const video = document.createElement('video');
+        video.src = event.target.result;
+
+        video.addEventListener('loadedmetadata', function() {
+          const row = tableBody.insertRow();
+          const pathCell = row.insertCell();
+          const sizeCell = row.insertCell();
+          const is1080p = row.insertCell();
+          const f = video.videoWidth*video.videoHeight;
+          pathCell.textContent = filePath;
+
+          sizeCell.textContent = `${video.videoWidth}x${video.videoHeight}`;
+          is1080p.innerHTML = `${f>=2073600?"<span class='a'>高于或等于1080p</span>":(f>=921600?"<span class='b'>高于或等于720p</span>":"<span class='c'>低于720p</span>")}`
+        });
+      }
+
+      fileReader.readAsDataURL(file);
+    }
+  }
+
+</script>
+
+</body>
+</html>

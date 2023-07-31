@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        async function initialization() {
+            const loadLink = await Promise.all(
+                // 需加载url
+
+                ["https://unpkg.com/vue@next",
+                    "https://unpkg.com/naive-ui",
+                    "https://unpkg.com/dayjs@1.8.21/dayjs.min.js",
+                    "https://unpkg.com/xlsx/dist/xlsx.full.min.js",
+
+
+                ].map(async e => loadCDN(e))
+
+                // loadCDN(''),
+                // loadCDN(''),
+                // // loadCDN('https://cdn.example.com/font-awesome.min.css')
+            )
+            const loadRootApp = await new Promise((resolve, reject) => {
+                let div = document.createElement('div')
+                div.setAttribute('class', 'rootApp')
+                div.setAttribute('style',
+                    'position: absolute; width: 700px;height: 700px;position: absolute;left: 30%;top: 10%;"'
+                )
+                document.body.appendChild(div)
+                resolve(1)
+            })
+            main()
+
+        }
+        function main() {
+            Vue.createApp({
+                // <n-date-picker v-model:value="range" type="daterange" clearable style="z-index: 1999;"/>
+                // <pre>{{ JSON.stringify(range) }}</pre>
+                // 就和单文件vue文件中 template一样
+                template: `
+
+        <n-card title="抖音连接提取" style="max-width: 700px; z-index: 1999;" hoverable=true >
+            
+      
+        <n-config-provider :locale="zhCN" :date-locale="dateZhCN">
+        
+        
+        <n-space justify="center">
+
+        <n-space vertical>
+  
+    
+   
+            <n-input
+              v-model:value="value"
+              type="textarea"
+              placeholder="输入uid"
+        style="width:600px"
+            />
+            <n-input
+              v-model:value="outValue"
+              type="textarea"
+              placeholder=""
+            />
+            <div>
+                <n-button type="primary" @click="send">
+                  获取数据
+                </n-button>
+                <n-button type="warning" @click="reset">
+                  重置
+                </n-button>
+              </div>
+          </n-space>
+
+        </n-space>
+
+
+    </n-config-provider>
+</n-card>
+
+         `,
+                setup() {
+                    const b = "a"
+
+                    function aab() {
+                        console.log(1)
+                    }
+                    const outValue = Vue.ref(null)
+                    const value = Vue.ref(null)
+                    const {
+                        zhCN,
+                        dateZhCN
+                    } = naive
+                    // const message = naive.useMessage()
+
+
+
+                    //       function createMessage() {
+                    //             message.info(
+                    //                "缺少参数",
+                    //                      { duration: 5000 }
+                    //                )
+                    //          }
+
+                    const send = async () => {
+                        console.log(1)
+                        if (value.value == null) {
+                            //  createMessage()
+                            return
+                        }
+                        let ids = value.value.trim().split(/\n/g)
+
+
+                        let getUrl = ids.map(e => {
+                            return [e.match(/https:\/\/(.*?)\//g)[0], e.match(/(?<=\/ ).*?(?=  https)/g)[0]].join('	')
+                        }).join('\n')
+                        console.log(ids);
+
+                        outValue.value = getUrl
+
+
+                        // let Option =
+                        //     `,\"publishBeginTime\":${range.value[0]},\"publishEndTime\":${range.value[1]}`
+                        // let csv = []
+                        // for (let index = 0; index < ids.length; index++) {
+                        //     const id = ids[index];
+                        //     csv.push(await get_data(id, Option))
+
+                        // }
+                        // console.log(csv);
+                        // exportToExcel(csv)
+                    }
+
+                    const reset = () => {
+                        // range.value = null
+                        value.value = null
+                        outValue.value = null
+                    }
+                    // 组合式setup 中的参数和函数 需要返回 
+                    return {
+                        aab,
+                        b,
+                        value,
+                        outValue,
+                        zhCN,
+                        dateZhCN,
+                        reset,
+                        send,
+                    }
+                }
+
+
+            }).use(naive).mount('.rootApp')
+
+
+        }
+
+
+        function loadCDN(url) {
+            return new Promise(function (resolve, reject) {
+                var script = document.createElement('script');
+                script.src = url;
+                script.onload = resolve;
+                script.onerror = reject;
+                document.getElementsByTagName('head')[0].appendChild(script);
+
+            });
+        }
+
+
+
+
+        // 自己代码
+
+
+
+
+
+
+
+        initialization()
+    </script>
+</body>
+
+</html>
