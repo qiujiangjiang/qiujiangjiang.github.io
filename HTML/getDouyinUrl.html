@@ -117,7 +117,7 @@
 
 
                         let getUrl = ids.map(e => {
-                            return [e.match(/https:\/\/(.*?)\//g)[0], e.match(/(?<=\/ ).*?(?= https)/g)[0]].join('	')
+                            return [e.match(/https:\/\/(.*)\//g)[0], e.match(/(?<=\/ ).*?(?= https)/g)[0]].join('	')
                         }).join('\n')
                         console.log(ids);
 
