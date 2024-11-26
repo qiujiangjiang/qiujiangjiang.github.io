@@ -5,12 +5,15 @@ import {
   assert,
   breakpointsAntDesign,
   breakpointsBootstrapV5,
+  breakpointsElement,
   breakpointsMasterCss,
   breakpointsPrimeFlex,
   breakpointsQuasar,
   breakpointsSematic,
   breakpointsTailwind,
   breakpointsVuetify,
+  breakpointsVuetifyV2,
+  breakpointsVuetifyV3,
   bypassFilter,
   camelize,
   clamp,
@@ -271,9 +274,9 @@ import {
   watchTriggerable,
   watchWithFilter,
   whenever
-} from "./chunk-DN3Q4TEW.js";
-import "./chunk-456JUNPJ.js";
-import "./chunk-ZS7NZCD4.js";
+} from "./chunk-A7UTJUSY.js";
+import "./chunk-VJWGEPT5.js";
+import "./chunk-UVKRO5ER.js";
 export {
   DefaultMagicKeysAliasMap,
   StorageSerializers,
@@ -283,12 +286,15 @@ export {
   refAutoReset as autoResetRef,
   breakpointsAntDesign,
   breakpointsBootstrapV5,
+  breakpointsElement,
   breakpointsMasterCss,
   breakpointsPrimeFlex,
   breakpointsQuasar,
   breakpointsSematic,
   breakpointsTailwind,
   breakpointsVuetify,
+  breakpointsVuetifyV2,
+  breakpointsVuetifyV3,
   bypassFilter,
   camelize,
   clamp,

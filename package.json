@@ -1,6 +1,7 @@
 {
+"type": "module", 
   "scripts": {
-    "docs:dev": " node .vitepress/创建文章列表.js && vitepress dev",
+    "docs:dev": "vitepress dev",
     "docs:build": "vitepress build",
     "docs:preview": "vitepress preview"
   },

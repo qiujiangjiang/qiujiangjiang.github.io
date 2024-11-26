@@ -1,4 +1,4 @@
-import "./chunk-ZS7NZCD4.js";
+import "./chunk-UVKRO5ER.js";
 
 // node_modules/@mdit-vue/shared/dist/index.mjs
 var htmlEscapeMap = {
@@ -76,10 +76,10 @@ var resolveHeadersFromTokens = (tokens, {
   };
   for (let i = 0; i < tokens.length; i += 1) {
     const token = tokens[i];
-    if ((token == null ? void 0 : token.type) !== "heading_open") {
+    if (token.type !== "heading_open") {
       continue;
     }
-    if ((token == null ? void 0 : token.level) !== 0 && !shouldAllowNested) {
+    if (token.level !== 0 && !shouldAllowNested) {
       continue;
     }
     const headerLevel = Number.parseInt(token.tag.slice(1), 10);
@@ -116,4 +116,9 @@ export {
   resolveTitleFromToken,
   slugify
 };
+/*! Bundled license information:
+
+@mdit-vue/shared/dist/index.mjs:
+  (* istanbul ignore if -- @preserve *)
+*/
 //# sourceMappingURL=@mdit-vue_shared.js.map
