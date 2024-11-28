@@ -1,6 +1,15 @@
+/*
+ * @Author: qiujiangjiang 1157060413@qq.com
+ * @Date: 2024-11-25 19:19:32
+ * @LastEditors: qiujiangjiang 1157060413@qq.com
+ * @LastEditTime: 2024-11-28 21:29:27
+ * @FilePath: \blog-source\.vitepress\config.mts
+ * @Description: 
+ * 
+ * Copyright (c) 2024 by ${git_name_email}, All Rights Reserved. 
+ */
 import { defineConfig, DefaultTheme } from "vitepress";
 import { tools } from "../pages/toolsPage/tools";
-
 
 
 const fileAndStyles: Record<string, string> = {}
@@ -43,9 +52,10 @@ export default defineConfig({
       provider: "local",
     },
     sidebar: [
+      //默认侧边栏
       {
-        text: "Examples",
-        // collapsed: false,
+        text: "导航栏",
+       collapsed: false,
         items: [
           { text: "Markdown Examples", link: "/markdown-examples" },
           { text: "Runtime API Examples", link: "/api-examples" },
@@ -67,7 +77,9 @@ export default defineConfig({
     ssr: {
       noExternal: ['naive-ui', 'date-fns', 'vueuc']
     },
-    plugins:[]
+    plugins:[
+    
+    ]
   },
   // async enhanceApp({ app }) {
   //   app.config.globalProperties.getResourceFileNames = getResourceFileNames;
@@ -91,4 +103,6 @@ export default defineConfig({
       return code.replace(/<\/head>/, style + '</head>')
     }
   }
+
+
 });

@@ -37,16 +37,49 @@ import { NAV_DATA } from './pages/nav/data'
 import  MNavLinks from './.vitepress/components/MNavLinks.vue'
 import {data} from './pages/nav/read.data.js'
 import TableTranspose from './pages/toolsPage/TableTranspose.vue';
+import SearchBox from './.vitepress/components/search.vue';
+import { ref } from 'vue';
+import { NLayoutSider, NMenu } from 'naive-ui';
+// 定义侧边栏菜单选项
+const menuOptions = ref([
+  {
+    label: '首页',
+    key: '/',
+    icon: 'home'
+  },
+  {
+    label: '文档',
+    key: '/docs',
+    icon: 'document'
+  },
+  {
+    label: '关于我们',
+    key: '/about',
+    icon: 'info-circle'
+  },
+]);
 
+// 处理菜单选项被选中的事件
+const handleSelect = (key) => {
+  // 这里可以根据选中的key进行页面跳转等操作
+  console.log(`选中了: ${key}`);
+};
 // import 'ant-design-vue/dist/reset.css';
 console.log(NAV_DATA)
 </script>
 <style src="./pages/nav/index.scss"></style>
-
+ <n-layout-sider bordered :width="200">
+    <n-menu :options="menuOptions" @select="handleSelect" />
+  </n-layout-sider>
 <br />
 
 # 前端导航
-
+  <div>
+    <!-- 其他布局内容 -->
+    <SearchEngineSwitcher />
+    <SearchBox /> <!-- 假设已经有一个名为SearchBox的搜索框组件，由搜索插件生成 -->
+    <!-- 其他布局内容 -->
+  </div>
 <MNavLinks v-for="{title, items} in NAV_DATA" :title="title" :items="items"/>
 
 <br />

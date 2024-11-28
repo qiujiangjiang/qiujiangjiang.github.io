@@ -1,4 +1,14 @@
-const fs = require('fs');
+/*
+ * @Author: qiujiangjiang 1157060413@qq.com
+ * @Date: 2024-11-25 19:19:32
+ * @LastEditors: qiujiangjiang 1157060413@qq.com
+ * @LastEditTime: 2024-11-28 20:55:42
+ * @FilePath: \blog-source\pages\nav\read.data.js
+ * @Description: 
+ * 
+ * Copyright (c) 2024 by ${git_name_email}, All Rights Reserved. 
+ */
+import fs from 'fs';
 // example.data.js
 export default {
     watch: ['../../.vitepress/assets/data.json'],
