@@ -13,14 +13,14 @@ jobs:
     steps:
       # 检出代码
       - name: Checkout
-        uses: qiujiangjiang/qiujiangjiang.github.io
+        uses: actions/checkout@v3
         with:
           # 获取所有历史记录和标签
           fetch-depth: 0
 
       # 设置 Node.js 环境
       - name: Set up Node.js
-        uses: qiujiangjiang/qiujiangjiang.github.io
+        uses: actions/setup-node@v3
         with:
           node-version: 18
 
@@ -34,7 +34,7 @@ jobs:
 
       # 部署到 GitHub Pages
       - name: Deploy to GitHub Pages
-        uses: qiujiangjiang/qiujiangjiang.github.io
+        uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./docs/.vitepress/dist
