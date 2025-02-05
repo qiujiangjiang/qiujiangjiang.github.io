@@ -4,7 +4,7 @@ on:
   # 当推送到 main 分支时触发工作流
   push:
     branches:
-      - main
+      - master
 
 jobs:
   deploy:
