@@ -1,6 +1,6 @@
 ---
 # https://vitepress.dev/reference/default-theme-home-page
-layout: home
+layout: home 
 
 hero:
   name: "小江哥的资源库"
@@ -68,9 +68,7 @@ const handleSelect = (key) => {
 console.log(NAV_DATA)
 </script>
 <style src="./pages/nav/index.scss"></style>
- <n-layout-sider bordered :width="200">
-    <n-menu :options="menuOptions" @select="handleSelect" />
-  </n-layout-sider>
+
 <br />
 
 # 前端导航

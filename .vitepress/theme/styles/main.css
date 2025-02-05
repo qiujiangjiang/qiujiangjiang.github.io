@@ -1,0 +1,11 @@
+:root {
+    /* 自定义 CSS 变量 */
+    --vp-c-brand: #ffa517;
+    --vp-c-brand-light: #ffb23d;
+    --vp-c-brand-dark: #f09400;
+  }
+  
+  /* 自定义全局样式 */
+  .custom-layout {
+    /* 自定义布局样式 */
+  }

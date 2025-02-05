@@ -2,7 +2,7 @@
  * @Author: qiujiangjiang 1157060413@qq.com
  * @Date: 2024-11-25 19:19:32
  * @LastEditors: qiujiangjiang 1157060413@qq.com
- * @LastEditTime: 2024-11-28 21:29:27
+ * @LastEditTime: 2025-01-13 23:47:03
  * @FilePath: \blog-source\.vitepress\config.mts
  * @Description: 
  * 
@@ -27,6 +27,8 @@ function getitems(): (
 
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
+  base: '/qiujiangjiang.github.io/',
+  
   title: "小江哥的资源库",
   description: "不定期更新的",
   themeConfig: {
