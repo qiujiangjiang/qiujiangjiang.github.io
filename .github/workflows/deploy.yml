@@ -9,7 +9,8 @@ on:
 jobs:
   deploy:
     runs-on: ubuntu-latest
-
+    permissions:
+      contents: write
     steps:
       # 检出代码
       - name: Checkout
@@ -22,7 +23,7 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: 18
+          node-version: 22
 
       # 安装依赖
       - name: Install dependencies
