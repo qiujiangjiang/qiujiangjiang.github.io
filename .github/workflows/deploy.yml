@@ -34,7 +34,7 @@ jobs:
       - name: Build VitePress site
         run: npm run docs:build
         env:
-          NODE_ENV: production  # 确保在生产环境下构建
+          NODE_ENV: production
 
       # 部署到 GitHub Pages
       - name: Deploy to GitHub Pages
@@ -42,5 +42,5 @@ jobs:
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: .vitepress/dist
-          force_orphan: true    # 添加这行以清理历史部署
+          force_orphan: true
 

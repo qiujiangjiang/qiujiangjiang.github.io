@@ -27,14 +27,17 @@ function getitems(): (
 
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
-  base: '/qiujiangjiang.github.io/',
+  title: "我的网站",
+  description: "网站描述",
+  base: '/',  // 对于 username.github.io 仓库，使用根路径 '/'
   
-  title: "小江哥的资源库",
-  description: "不定期更新的",
+  // 构建输出配置
+  outDir: '.vitepress/dist',
+  
   themeConfig: {
     // https://vitepress.dev/reference/default-theme-config
     nav: [
-      { text: "Home", link: "/" },
+      { text: '首页', link: '/' },
       // { text: 'Examples', link: '/markdown-examples' },
       {
         text: "小工具",
@@ -66,8 +69,13 @@ export default defineConfig({
     ],
 
     socialLinks: [
-      { icon: "github", link: "https://github.com/vuejs/vitepress" },
+      { icon: 'github', link: 'https://github.com/qiujiangjiang' }
     ],
+
+    // 确保资源路径正确
+    head: [
+      ['link', { rel: 'icon', href: '/favicon.ico' }]
+    ]
   },
   locales: {
     root: {
@@ -81,7 +89,16 @@ export default defineConfig({
     },
     plugins:[
     
-    ]
+    ],
+    build: {
+      minify: 'terser',
+      chunkSizeWarningLimit: 1500,
+      rollupOptions: {
+        output: {
+          manualChunks: undefined
+        }
+      }
+    }
   },
   // async enhanceApp({ app }) {
   //   app.config.globalProperties.getResourceFileNames = getResourceFileNames;
